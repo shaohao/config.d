@@ -1,0 +1,9 @@
+!Make the CapsLock key as a additional Ctrl key
+remove lock = Caps_Lock
+remove control = Control_L
+keysym Caps_Lock = Control_L
+add lock = Caps_Lock
+add control = Control_L
+
+!Multimedia key
+keycode 148 = XF86Eject

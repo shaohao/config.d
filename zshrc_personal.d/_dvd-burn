@@ -1,0 +1,17 @@
+#compdef dvd-burn
+
+_burn_items() {
+	case $words[CURRENT-1] in
+	(new|add)
+		_files
+		;;
+	(iso)
+		_path_files -g \*.iso
+		;;
+	esac
+}
+
+_arguments \
+	':Burn type:(new add iso)' \
+	':items:_burn_items'
+

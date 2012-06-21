@@ -1,0 +1,53 @@
+_backup () {
+	local cur prev
+	local opts opt
+
+	_get_comp_words_by_ref cur prev
+
+	opts="gzip bzip2 xz p7zip"
+
+	for opt in $opts; do
+		if [ $opt == "$prev" ]; then
+			COMPREPLY=( $(compgen -d "$cur") )
+			return 0
+		fi
+	done
+
+	COMPREPLY=( $(compgen -W "$opts" -- "$cur") )
+	return 0
+}
+
+backup () {
+	local fn ffn
+	if [ $# -lt 2 ]; then
+		shift
+	elif [ $# -ge 2 ] ; then
+		fn=`basename $2`_`date +%y%m%d_%H%M%S`
+	fi
+	case $1 in
+		gzip)
+			ffn=$fn.tar.gz
+			tar cvfz $ffn $2
+			;;
+		bzip2)
+			ffn=$fn.tar.bz2
+			tar cvfj $ffn $2
+			;;
+		xz)
+			ffn=$fn.tar.xz
+			tar cvfJ $ffn $2
+			;;
+		p7zip)
+			ffn=$fn.tar.7z
+			tar cv $2 | 7z a $ffn -si
+			;;
+		*)
+			echo "Usage: backup gzip|bzip2|xz|p7zip dir"
+			return 0
+			;;
+	esac
+	chmod 644 $ffn
+}
+complete -F _backup backup
+
+# ex: ts=4 sw=4 ft=sh

@@ -1,0 +1,31 @@
+# ls
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias lsa='ls -a'
+alias lsd='ls -d */'
+alias lsda='ls -a -d */'
+alias lla='ls -l -a'
+alias lld='ls -l -d */'
+alias llda='ls -l -a -d */'
+
+# rm
+alias rm='rm -vI'
+
+# vim
+alias vim='vim -p'
+
+# cscope
+alias csdb='if test -e `pwd`/.cscope/cscope.out; then export CSCOPE_DB=`pwd`/.cscope/cscope.out; else export -n CSCOPE_DB; fi'
+
+# info
+alias info='info --vi-keys'
+
+# grab web
+alias webgrab='wget -r -p -k -np'
+
+# arch
+alias update='sudo pacman -Syu'
+alias clean='sudo pacman -Sc --noconfirm'
+alias search='pacman -Ss'
+
+# ex: ts=4 sw=4 filetype=zsh

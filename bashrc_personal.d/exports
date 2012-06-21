@@ -1,0 +1,16 @@
+# pager
+if [[ -f /usr/bin/most ]]; then
+	export PAGER=most
+fi
+# git
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+
+# prompt
+export PS1='.--[\[\e[34;1m\]\t \[\e[32;1m\]\u\[\e[35;1m\]@\[\e[36;1m\]\h\[\e[31;1m\]:\[\e[34;1m\]\w\[\e[0m\]$(__git_ps1 " :%s")]\n\`--\[\e[35;1m\]\$ \[\e[0m\]'
+
+# editor
+export EDITOR=vim
+
+# ex: ts=4 sw=4 ft=sh

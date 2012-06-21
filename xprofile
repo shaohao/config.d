@@ -1,0 +1,13 @@
+#!/bin/sh
+
+[ -f $HOME/.Xmodmap ] && xmodmap $HOME/.Xmodmap
+
+urxvtd -q -o -f
+
+eval `dbus-launch --sh-syntax --exit-with-session`
+
+export export XMODIFIERS="@im=fcitx"
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+killall fcitx
+fcitx &
