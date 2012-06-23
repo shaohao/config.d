@@ -1,17 +1,17 @@
 # Use emacs mode
 set -o emacs
 
-# up, down, left, right arrow
+# up,down,left,right arrow
 bind '"\e[A": previous-history'
 bind '"\e[B": next-history'
 bind '"\e[C": forward-char'
 bind '"\e[D": backward-char'
 
-# ctrl-j, ctrl-k
+# ctrl-j,ctrl-k
 bind '"\C-j": history-search-forward'
 bind '"\C-k": history-search-backward'
 
-# home, end
+# home,end
 bind '"\e[7~": beginning-of-line'
 bind '"\e[8~": end-of-line'
 

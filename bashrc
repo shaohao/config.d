@@ -18,7 +18,9 @@ shopt -s cdspell
 # Personal scripts
 if [ -d $HOME/.bashrc_personal.d ]; then
 	for util in $HOME/.bashrc_personal.d/*; do
-		. $util
+		if [[ -f $util ]]; then
+			. $util
+		fi
 	done
 	unset util
 fi
