@@ -1,3 +1,6 @@
+" Fix to UTF-8 encoding
+set encoding=utf-8
+
 " Read ~/.vim/vimrc file
 runtime vimrc
 
