@@ -1,16 +1,13 @@
 # Use VIM as man pager
 vman () {
-	export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
-	                 /usr/bin/vim -R \
-	                 -c 'set stal=0 ft=man nomod nolist' -c 'map q :q<CR>' \
-	                 -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
-	                 -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
+	local pager="/bin/sh -c \"unset PAGER;col -b -x | \
+		/usr/bin/vim -R \
+		-c 'set stal=0 ft=man nomod nolist' -c 'map q :q<CR>' \
+		-c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
+		-c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
 	# invoke man page
-	/usr/bin/man $1
-
-	# we muse unset the PAGER, so regular man pager is used afterwards
-	unset PAGER
+	PAGER=$pager /usr/bin/man $1
 }
 #complete -F _man vman
 

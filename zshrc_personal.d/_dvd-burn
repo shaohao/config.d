@@ -3,7 +3,7 @@
 _burn_items() {
 	case $words[CURRENT-1] in
 	(new|add)
-		_files
+		_path_files -g \*.\*
 		;;
 	(iso)
 		_path_files -g \*.iso

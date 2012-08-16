@@ -1,3 +1,8 @@
-defaults.pcm.card 1
-defaults.pcm.device 0
-defaults.ctl.card 1
+pcm.!default {
+	type hw
+	card NVidia
+}
+ctl.!default {
+	type hw
+	card NVidia
+}
