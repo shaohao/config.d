@@ -1,6 +1,7 @@
 #compdef dvd-burn
 
-_burn_items() {
+_burn_items()
+{
 	case $words[CURRENT-1] in
 	(new|add)
 		_path_files -g \*.\*

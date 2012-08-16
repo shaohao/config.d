@@ -42,15 +42,17 @@ SAVEHIST=1000
 setopt appendhistory notify
 unsetopt beep
 
-# Function path
-fpath=($HOME/.zshrc_personal.d $fpath)
-
 # Personal scripts
 if [[ -d $HOME/.zshrc_personal.d ]]; then
+	fpath=($HOME/.zshrc_personal.d $fpath)
 	for util in $HOME/.zshrc_personal.d/[^_]*; do
 		source $util
 	done
 	unset util
 fi
+
+# Initialize completion
+autoload -Uz compinit
+compinit
 
 # ex: ts=4 sw=4 ft=zsh
