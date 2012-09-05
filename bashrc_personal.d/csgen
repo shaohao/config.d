@@ -4,7 +4,7 @@ csgen () {
 	local ext exts
 	local pats
 	local fpath
-	if [ $# -lt 1 ]; then
+	if [[ $# -lt 1 ]]; then
 		echo "Usage: csgen pats [path...]"
 		echo
 		echo "pats: File match patterns separated by ':'"
@@ -19,14 +19,14 @@ csgen () {
 		pats=''
 		expats=''
 		fpath='.'
-		if [ $# -gt 1 ]; then
+		if [[ $# -gt 1 ]]; then
 			shift
 			fpath=$*
 		fi
 		for ext in $exts; do
 			pats+="-name $ext -o "
 		done
-		if ! [ -d $csdir ]; then
+		if [[ ! -d $csdir ]]; then
 			mkdir $csdir
 		fi
 		eval find $fpath \

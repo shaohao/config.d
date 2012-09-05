@@ -1,0 +1,33 @@
+workenv () {
+	local prj_name
+
+	if [[ $# -lt 1 ]]; then
+		echo "Usage: workenv prj_name"
+		return
+	fi
+
+	prj_name=$1
+
+	# work window
+	tmux new-session -d -s $prj_name -n '工作'
+	tmux split-window -h -l 80
+	tmux select-pane -L
+	tmux split-window -v
+	tmux select-pane -R
+
+	# reference window
+	tmux new-window -n '参考'
+	tmux split-window -h -l 80
+	tmux split-window -v
+	tmux select-pane -L
+
+	# Misc window
+	tmux new-window -n '其他'
+
+	# Reselect the first window as the main window
+	tmux select-window -t 0
+
+	tmux attach-session
+}
+
+# ex: ts=4 sw=4 filetype=sh

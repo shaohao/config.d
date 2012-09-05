@@ -1,48 +1,64 @@
 _backup () {
-	local cur prev
+	local cur cword words
 	local opts opt
 
-	_get_comp_words_by_ref cur prev
+	_get_comp_words_by_ref cur cword words
 
 	opts="gzip bzip2 xz p7zip"
 
-	for opt in $opts; do
-		if [ $opt == "$prev" ]; then
-			COMPREPLY=( $(compgen -d "$cur") )
-			return 0
-		fi
-	done
+	if [[ $cword -gt 1 ]]; then
+		for opt in $opts; do
+			if [[ ${words[1]} == $opt ]]; then
+				COMPREPLY=( $(compgen -f -- "$cur") )
+				break
+			fi
+		done
+	else
+		COMPREPLY=( $(compgen -W "$opts" -- "$cur") )
+	fi
 
-	COMPREPLY=( $(compgen -W "$opts" -- "$cur") )
 	return 0
 }
 
 backup () {
 	local fn ffn
-	if [ $# -lt 2 ]; then
+	local kind
+	local timestamp
+
+	timestamp=$(date +%y%m%d%H%M%S)
+
+	if [[ $# -le 1 ]]; then
+		kind=x
+	else
+		kind=$1
 		shift
-	elif [ $# -ge 2 ] ; then
-		fn=`basename $2`_`date +%y%m%d_%H%M%S`
+		if [[ $# -eq 1 ]]; then
+			fn=$(basename $1 | cut -d. -f1)_$timestamp
+		else # [[ $# -gt 1 ]]; then
+			fn=$timestamp
+		fi
 	fi
-	case $1 in
+
+	case $kind in
 		gzip)
 			ffn=$fn.tar.gz
-			tar cvfz $ffn $2
+			tar cvfz $ffn $*
 			;;
 		bzip2)
 			ffn=$fn.tar.bz2
-			tar cvfj $ffn $2
+			tar cvfj $ffn $*
 			;;
 		xz)
 			ffn=$fn.tar.xz
-			tar cvfJ $ffn $2
+			tar cvfJ $ffn $*
 			;;
 		p7zip)
 			ffn=$fn.tar.7z
-			tar cv $2 | 7z a $ffn -si
+			tar cv $* | 7z a $ffn -si
 			;;
 		*)
-			echo "Usage: backup gzip|bzip2|xz|p7zip dir"
+			# Exception
+			echo "Usage: backup gzip|bzip2|xz|p7zip dir [file ...]"
 			return 0
 			;;
 	esac
