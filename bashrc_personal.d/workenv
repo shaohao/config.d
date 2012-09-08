@@ -1,12 +1,11 @@
 workenv () {
 	local prj_name
 
-	if [[ $# -lt 1 ]]; then
-		echo "Usage: workenv prj_name"
-		return
+	if [[ $# -ge 1 ]]; then
+		prj_name=$1
+	else
+		prj_name=$(basename $PWD)
 	fi
-
-	prj_name=$1
 
 	# work window
 	tmux new-session -d -s $prj_name -n '工作'

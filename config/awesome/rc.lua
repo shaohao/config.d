@@ -91,7 +91,7 @@ myawesomemenu = {
 }
 
 mynetmenu = {
-   { "Chromium", "chromium --proxy-pac-url=file:///home/jinxin/bin/wallproxy-plus/proxy.pac --allow-running-insecure-content" },
+   { "Chromium", "chromium --proxy-pac-url=file:///home/jinxin/bin/wallproxy/local/misc/proxy.pac --allow-running-insecure-content" },
 }
 
 mymediamenu = {

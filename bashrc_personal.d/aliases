@@ -33,7 +33,4 @@ alias webgrab='wget -r -p -k -np'
 alias update='sudo pacman -Syu'
 alias clean='sudo pacman -Sc --noconfirm'
 
-# myrdp
-alias myrdp='rdp 192.168.122.74'
-
 # ex: ts=4 sw=4 ft=sh
