@@ -13,8 +13,7 @@ csgen () {
 		echo "      More than one paths can be appended."
 		echo
 	else
-		exts=${1//:/ }
-		exts=${exts//\*/\\\*}
+		exts=${1//\*/\\\*}
 		exts=${exts//\?/\\\?}
 		pats=''
 		expats=''
@@ -23,14 +22,14 @@ csgen () {
 			shift
 			fpath=$*
 		fi
-		for ext in $exts; do
+		for ext in ${(s,:,)exts}; do
 			pats+="-name $ext -o "
 		done
 		if ! [ -d $csdir ]; then
 			mkdir $csdir
 		fi
 		eval find $fpath \
-			-path \'*/.*\' -prune -o \
+			-path '\*/.\*' -prune -o \
 			\\\( ${pats%' -o '} \\\) \
 			-print \
 		> ${csdir}/cscope.files
