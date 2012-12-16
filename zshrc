@@ -40,6 +40,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory notify
+unsetopt sharehistory
 unsetopt beep
 
 # Personal scripts
