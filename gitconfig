@@ -1,0 +1,12 @@
+[core]
+	editor = vim
+	excludesfile = ~/.cvsignore
+[color]
+	ui = auto
+[user]
+	name = Shao Hao
+	email = shaohao@live.cn
+[credential]
+	helper = cache
+[push]
+	default = simple

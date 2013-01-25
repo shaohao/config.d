@@ -21,7 +21,16 @@ if _inst_cfg zsh ; then
 fi
 
 if _inst_cfg awesome ; then
-	ln -sfv $PWD/config/awesome $HOME/.config/awesome
+	ln -sfv $PWD/awesome $HOME/.config/awesome
+	ln -sfv $PWD/awesome/xprofile $HOME/.xprofile
+fi
+
+if _inst_cfg gnome; then
+	ln -sfv $PWD/gnome/xprofile $HOME/.xprofile
+fi
+
+if _inst_cfg git; then
+	ln -svf $PWD/gitconfig $HOME/.gitconfig
 fi
 
 if _inst_cfg rxvt-unicode ; then
@@ -31,6 +40,10 @@ fi
 if _inst_cfg vim ; then
 	ln -sfv $PWD/vimrc $HOME/.vimrc
 	ln -sfvT $PWD/vimfiles $HOME/.vim
+fi
+
+if _inst_cfg vifm; then
+	ln -sfv $PWD/vifmrc $HOME/.vifm/vifmrc
 fi
 
 if _inst_cfg most ; then
