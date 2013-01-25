@@ -43,10 +43,10 @@ URxvt.troughColor:        #969696
 !URxvt.borderColor:        color
 !URxvt.backgroundPixmap:   I_Like_It_Black.png;:tile
 !URxvt.path:               /home/jinxin/图片/Backgrounds
-URxvt.font:               xft:Inconsolata:pixelsize=18:antialias=true,xft:DejVu San YuanTi Mono:pixelsize=18:antialias=true
-URxvt.boldFont:           xft:Inconsolata:bold:pixelsize=18:antialias=true,xft:DejVu San YuanTi Mono Bold:bold:pixelsize=18:antialias=true
-URxvt.italicFont:         xft:Inconsolata:italic:pixelsize=18:antialias=true,xft:DejVu San YuanTi Mono Oblique:italic:pixelsize=18:antialias=true
-URxvt.boldItalicFont:     xft:Inconsolata:bold:italic:pixelsize=18:antialias=true,xft:DejVu San YuanTi Mono BoldOblique:bold:italic:pixelsize=18:antialias=true
+URxvt.font:               xft:Inconsolata:pixelsize=18:antialias=true,xft:wqy-microhei:pixelsize=18:antialias=true
+URxvt.boldFont:           xft:Inconsolata:bold:pixelsize=18:antialias=true,xft:wqy-microhei:bold:pixelsize=18:antialias=true
+URxvt.italicFont:         xft:Inconsolata:italic:pixelsize=18:antialias=true,xft:wqy-microhei:italic:pixelsize=18:antialias=true
+URxvt.boldItalicFont:     xft:Inconsolata:bold:italic:pixelsize=18:antialias=true,xft:wqy-microhei:bold:italic:pixelsize=18:antialias=true
 URxvt.intensityStyles:    true
 URxvt.title:              终端
 URxvt.iconName:           终端
