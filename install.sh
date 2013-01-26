@@ -21,7 +21,7 @@ if _inst_cfg zsh ; then
 fi
 
 if _inst_cfg awesome ; then
-	ln -sfv $PWD/awesome $HOME/.config/awesome
+	ln -sfvT $PWD/awesome $HOME/.config/awesome
 	ln -sfv $PWD/awesome/xprofile $HOME/.xprofile
 fi
 
