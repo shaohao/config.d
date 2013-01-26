@@ -9,9 +9,6 @@
 [[ -f /etc/profile ]] && \
 	. /etc/profile
 
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-	. /usr/share/bash-completion/bash_completion
-
 # Correct minor errors in a cd command
 shopt -s cdspell
 

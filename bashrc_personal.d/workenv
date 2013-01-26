@@ -9,14 +9,14 @@ workenv () {
 
 	# work window
 	tmux new-session -d -s $prj_name -n '工作'
-	tmux split-window -h -l 80
+	tmux split-window -h
 	tmux select-pane -L
 	tmux split-window -v
 	tmux select-pane -R
 
 	# reference window
 	tmux new-window -n '参考'
-	tmux split-window -h -l 80
+	tmux split-window -h
 	tmux split-window -v
 	tmux select-pane -L
 

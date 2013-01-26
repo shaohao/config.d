@@ -30,11 +30,15 @@ if _inst_cfg gnome; then
 fi
 
 if _inst_cfg git; then
-	ln -svf $PWD/gitconfig $HOME/.gitconfig
+	echo "Create symbol link to git and git-prompt.sh manually"
 fi
 
 if _inst_cfg rxvt-unicode ; then
 	ln -sfv $PWD/Xdefaults $HOME/.Xdefaults
+fi
+
+if _inst_cfg tmux ; then
+	ln -sfv $PWD/tmux.conf $HOME/.tmux.conf
 fi
 
 if _inst_cfg vim ; then

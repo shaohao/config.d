@@ -104,7 +104,7 @@ URxvt.perl-ext-common:    default,matcher
 !URxvt.selection.pattern-idx:    perl-regex
 !URxvt.selection-autotransform.idx:  perl-transform
 !URxvt.searchable-scrollback:    keysym
-URxvt.urlLauncher:        chromium
+!URxvt.urlLauncher:        epiphany
 !URxvt.transient-for:      windowid
 !URxvt.override-redirect:  bollean
 URxvt.iso14755:           true
