@@ -15,7 +15,7 @@ alias rm='rm -vI'
 alias vim='vim -p'
 
 # cscope
-alias csdb='if test -e `pwd`/.cscope/cscope.out; then export CSCOPE_DB=`pwd`/.cscope/cscope.out; else export -n CSCOPE_DB; fi'
+alias csdb='if test -e $PWD/.cscope/cscope.out; then export CSCOPE_DB=$PWD/.cscope/cscope.out; else export -n CSCOPE_DB; fi'
 
 # info
 alias info='info --vi-keys'

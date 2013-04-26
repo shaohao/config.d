@@ -41,7 +41,7 @@ end
 beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvtc"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -56,8 +56,8 @@ modkey = "Mod4"
 local layouts =
 {
     awful.layout.suit.floating,
-    awful.layout.suit.tile,
     awful.layout.suit.tile.left,
+    awful.layout.suit.tile,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
@@ -373,7 +373,7 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
+    { rule = { class = "mplayer2" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
@@ -382,6 +382,8 @@ awful.rules.rules = {
     { rule = { class = "Chromium" },
       properties = { tag = tags[1][3] } },
     { rule = { class = "Deadbeef" },
+      properties = { floating = true } },
+    { rule = { class = "feh" },
       properties = { floating = true } },
 }
 -- }}}
