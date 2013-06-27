@@ -87,7 +87,7 @@ URxvt.cutchars:           ‘’"&'()*+,:;<=>?@[]^{|}
 URxvt.preeditType:        Root
 URxvt.inputMethod:        ibus
 URxvt.imLocale:           zh_CN.UTF-8
-URxvt.imFont:             xft:DejaVu Sans YuanTi:pixelsize=14:antialias=true
+URxvt.imFont:             xft:wqy-microhei:pixelsize=14:antialias=true
 URxvt.tripleclickwords:   true
 URxvt.insecure:           true
 !URxvt.modifier:           modifier

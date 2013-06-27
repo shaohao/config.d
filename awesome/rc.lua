@@ -104,7 +104,7 @@ myawesomemenu = {
 }
 
 mynetmenu = {
-   { "Chromium", "chromium --proxy-pac-url=file:///home/jinxin/bin/wallproxy/local/misc/proxy.pac --allow-running-insecure-content" },
+   { "Chromium", "chromium --allow-running-insecure-content" },
 }
 
 mymediamenu = {
@@ -127,7 +127,6 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibox
 -- Create a textclock widget
-os.setlocale("zh_CN.UTF-8")
 mytextclock = awful.widget.textclock()
 
 -- Create a wibox for each screen and add it
