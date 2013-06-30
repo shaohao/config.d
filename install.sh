@@ -46,6 +46,10 @@ if _inst_cfg vim ; then
 	ln -sfvT $PWD/vimfiles $HOME/.vim
 fi
 
+if _inst_cfg ctags ; then
+	ln -sfv $PWD/ctags.conf $HOME/.ctags
+fi
+
 if _inst_cfg vifm; then
 	ln -sfv $PWD/vifmrc $HOME/.vifm/vifmrc
 fi
