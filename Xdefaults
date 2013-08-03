@@ -32,7 +32,7 @@ URxvt.jumpScroll:         true
 URxvt.skipScroll:         true
 !URxvt.transparent:        true
 URxvt.fading:             70
-URxvt.fadeColor:          gray
+!URxvt.fadeColor:          gray
 !URxvt.tintColor:          black
 !URxvt.shading:            30
 !URxvt.blendType:          diff

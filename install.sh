@@ -20,13 +20,10 @@ if _inst_cfg zsh ; then
 	ln -sfvT $PWD/oh-my-zsh $HOME/.oh-my-zsh
 fi
 
-if _inst_cfg awesome ; then
-	ln -sfvT $PWD/awesome $HOME/.config/awesome
-	ln -sfv $PWD/awesome/xprofile $HOME/.xprofile
-fi
-
-if _inst_cfg gnome; then
-	ln -sfv $PWD/gnome/xprofile $HOME/.xprofile
+if _inst_cfg i3-wm; then
+	ln -sfvT $PWD/i3 $HOME/.i3
+	ln -sfv $PWD/i3/xprofile $HOME/.xprofile
+	ln -sfv $PWD/i3/i3status.conf $HOME/.i3status.conf
 fi
 
 if _inst_cfg git; then
