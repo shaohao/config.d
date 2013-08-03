@@ -1,19 +1,22 @@
 #!/bin/bash
 
-p_rx=0
-p_tx=0
+declare -i p_rx=0
+declare -i p_tx=0
 
 goa_status() {
-	local obj
+	local _obj=$1
+	local val
 	if [ `pgrep -f 'goagent\/.*proxy\.py'` ]; then
-		obj='"full_text":"goa: yes","color":"#00FF00"'
+		val='"full_text":"goa: yes","color":"#00FF00"'
 	else
-		obj='"full_text":"goa: no","color":"#FF0000"'
+		val='"full_text":"goa: no","color":"#FF0000"'
 	fi
-	echo "{$obj}"
+	eval $_obj="'{$val}'"
 }
 
 net_status() {
+	local _obj=$1
+
 	cal_speed() {
 		echo $1 $2 | awk '{
 			v = (($1 - $2) * 1.0 / 5 / 1024);
@@ -25,9 +28,9 @@ net_status() {
 		}'
 	}
 
-	local obj='{'
 	local c_rx c_tx
 	local a_rx a_tx
+	local val
 	read c_rx < /sys/devices/pci0000\:00/0000\:00\:07.0/net/enp0s7/statistics/rx_bytes
 	read c_tx < /sys/devices/pci0000\:00/0000\:00\:07.0/net/enp0s7/statistics/tx_bytes
 	a_rx=$(cal_speed $c_rx $p_rx)
@@ -36,7 +39,9 @@ net_status() {
 	p_rx=$c_rx
 	p_tx=$c_tx
 
-	printf '{"full_text":"↓%s, ↑%s"}\n'  $a_rx  $a_tx;
+	val=$(printf '"full_text":"↓%s, ↑%s"' $a_rx $a_tx)
+
+	eval $_obj="'{$val}'"
 }
 
 # rebuild status
@@ -45,12 +50,12 @@ do
 	read line
 
 	# go-agent
-	obj=$(goa_status)
+	goa_status obj
 
 	obj+=','
 
 	# net speed
-	obj+=$(net_status)
+	net_status obj
 
 	echo $line | sed "s/\[{/[$obj,{/"
 done
