@@ -50,12 +50,12 @@ do
 	read line
 
 	# go-agent
-	goa_status obj
-
-	obj+=','
+	goa_status goa_obj
 
 	# net speed
-	net_status obj
+	net_status net_obj
+
+	obj="$goa_obj,$net_obj"
 
 	echo $line | sed "s/\[{/[$obj,{/"
 done
