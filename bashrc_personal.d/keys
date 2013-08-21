@@ -5,8 +5,8 @@ bind 'set show-all-if-ambiguous on'
 # up,down,left,right arrows
 bind '"\e[A": previous-history'
 bind '"\e[B": next-history'
-bind '"\e[D": backward-char'
 bind '"\e[C": forward-char'
+bind '"\e[D": backward-char'
 
 # ctrl-j,ctrl-k
 bind '"\C-j": history-search-forward'

@@ -18,6 +18,10 @@ backup () {
 
 	# Do backup/compress
 	case $kind in
+	tar)
+		ffn=$fn.tar
+		tar cvf $ffn $*
+		;;
 	gzip)
 		ffn=$fn.tar.gz
 		tar cvfz $ffn $*
@@ -36,7 +40,7 @@ backup () {
 		;;
 	*)
 		# Exception
-		echo "Usage: backup gzip|bzip2|xz|p7zip dir [file...]"
+		echo "Usage: backup tar|gzip|bzip2|xz|p7zip dir [file...]"
 		return 0
 		;;
 	esac
