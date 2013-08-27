@@ -1,3 +1,8 @@
+# Expand alias for BASH
+if [ x"$BASH_VERSION" != x ]; then
+	shopt -s expand_aliases
+fi
+
 # ls
 alias ls='ls --color=auto'
 alias ll='ls -l'
@@ -12,7 +17,10 @@ alias llda='ls -l -a -d */'
 alias rm='rm -vI'
 
 # vim
-alias vim='vim -p'
+alias vim='\vim -p'
+if which vimx &>/dev/null; then
+	alias vim='\vimx -p'
+fi
 
 # cscope
 alias csdb='if test -e $PWD/.cscope/cscope.out; then export CSCOPE_DB=$PWD/.cscope/cscope.out; else export -n CSCOPE_DB; fi'
@@ -28,4 +36,8 @@ alias update='sudo pacman -Syu'
 alias clean='sudo pacman -Sc --noconfirm'
 alias search='pacman -Ss'
 
-# ex: ts=4 sw=4 filetype=zsh
+# readline support for tclsh/wish
+alias tclsh='socat READLINE EXEC:"tclsh",pty,setsid,ctty'
+alias wish='socat READLINE EXEC:"wish",pty,setsid,ctty'
+
+# ex: ts=4 sw=4 filetype=sh

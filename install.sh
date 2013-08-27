@@ -20,13 +20,15 @@ if _inst_cfg zsh ; then
 	ln -sfvT $PWD/oh-my-zsh $HOME/.oh-my-zsh
 fi
 
-if _inst_cfg gnome; then
-	ln -sfv $PWD/gnome/xprofile $HOME/.xprofile
+if _inst_cfg i3-wm; then
+	ln -sfvT $PWD/i3 $HOME/.i3
+	ln -sfv $PWD/i3/xprofile $HOME/.xprofile
+	ln -sfv $PWD/i3/i3status.conf $HOME/.i3status.conf
 fi
 
 if _inst_cfg git; then
 	if [ -f /usr/share/git/git-prompt.sh ]; then
-		ln -sfv /usr/share/git/git-prompt.sh $PWD/bashrc_personal.d/git-prompt.sh
+		ln -sfv /usr/share/git/git-prompt.sh $PWD/bashrc_personal.d/git
 	elif [ -f /etc/bash_completion.d/git ]; then
 		ln -sfv /etc/bash_completion.d/git $PWD/bashrc_personal.d/git
 	fi
