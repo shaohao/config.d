@@ -20,17 +20,16 @@ if _inst_cfg zsh ; then
 	ln -sfvT $PWD/oh-my-zsh $HOME/.oh-my-zsh
 fi
 
-if _inst_cfg awesome ; then
-	ln -sfvT $PWD/awesome $HOME/.config/awesome
-	ln -sfv $PWD/awesome/xprofile $HOME/.xprofile
-fi
-
 if _inst_cfg gnome; then
 	ln -sfv $PWD/gnome/xprofile $HOME/.xprofile
 fi
 
 if _inst_cfg git; then
-	echo "Create symbol link to git and git-prompt.sh manually"
+	if [ -f /usr/share/git/git-prompt.sh ]; then
+		ln -sfv /usr/share/git/git-prompt.sh $PWD/bashrc_personal.d/git-prompt.sh
+	elif [ -f /etc/bash_completion.d/git ]; then
+		ln -sfv /etc/bash_completion.d/git $PWD/bashrc_personal.d/git
+	fi
 fi
 
 if _inst_cfg rxvt-unicode ; then
