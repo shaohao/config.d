@@ -59,8 +59,8 @@ if _inst_cfg most ; then
 	ln -sfv $PWD/mostrc $HOME/.mostrc
 fi
 
-if _inst_cfg mplayer ; then
-	ln -sfvT $PWD/mplayer $HOME/.mplayer
+if _inst_cfg mpv; then
+	ln -sfvT $PWD/mpv $HOME/.mpv
 fi
 
 # ex: ts=4 sw=4 ft=sh

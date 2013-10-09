@@ -1,0 +1,5 @@
+# Write your default config options here!
+vo=vdpau
+hwdec=vdpau
+ao=pulse
+subcp=cp936
