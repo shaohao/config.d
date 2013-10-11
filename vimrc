@@ -6,3 +6,4 @@ runtime vimrc
 
 " Customized color scheme
 colorscheme ir_black
+highlight PmenuSel ctermbg=white ctermfg=black

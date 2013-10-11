@@ -159,7 +159,7 @@ bar {
 new_window 1pixel
 
 # floating windows
-for_window [class="^Chromium$"] floating enable
+#for_window [class="^Chromium$"] floating enable
 for_window [class="^Deadbeef$"] floating enable
 for_window [class="^feh$"] floating enable
 for_window [class="^mpv$"] floating enable

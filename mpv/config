@@ -2,4 +2,5 @@
 vo=vdpau
 hwdec=vdpau
 ao=pulse
+softvol=yes
 subcp=cp936
