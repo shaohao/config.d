@@ -1,8 +1,0 @@
-pcm.!default {
-	type hw
-	card NVidia
-}
-ctl.!default {
-	type hw
-	card NVidia
-}
