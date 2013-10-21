@@ -27,10 +27,12 @@ if _inst_cfg i3-wm; then
 fi
 
 if _inst_cfg git; then
+	ln -sfv $PWD/gitconfig $HOME/.gitconfig
+	ln -sfv $PWD/cvsignore $HOME/.cvsignore
 	if [ -f /usr/share/git/git-prompt.sh ]; then
-		ln -sfv /usr/share/git/git-prompt.sh $PWD/bashrc_personal.d/git
-	elif [ -f /etc/bash_completion.d/git ]; then
-		ln -sfv /etc/bash_completion.d/git $PWD/bashrc_personal.d/git
+		ln -sfv /usr/share/git/git-prompt.sh $PWD/bashrc_personal.d/git-prompt
+	elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+		ln -sfv /usr/share/git-core/contrib/completion/git-prompt.sh $PWD/bashrc_personal.d/git-prompt
 	fi
 fi
 

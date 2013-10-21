@@ -48,8 +48,8 @@ URxvt.boldFont:           xft:Inconsolata:bold:pixelsize=18:antialias=true,xft:w
 URxvt.italicFont:         xft:Inconsolata:italic:pixelsize=18:antialias=true,xft:wqy-microhei:italic:pixelsize=18:antialias=true
 URxvt.boldItalicFont:     xft:Inconsolata:bold:italic:pixelsize=18:antialias=true,xft:wqy-microhei:bold:italic:pixelsize=18:antialias=true
 URxvt.intensityStyles:    true
-URxvt.title:              终端
-URxvt.iconName:           终端
+URxvt.title:              Terminal
+URxvt.iconName:           Terminal
 URxvt.mapAlert:           false
 URxvt.urgentOnBell:       false
 URxvt.visualBell:         false

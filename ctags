@@ -1,0 +1,9 @@
+--langdef=systemverilog
+--langmap=systemverilog:.v,.vh,.sv,svh,svp
+--regex-systemverilog=/^\s*module\s+(\w+)/\1/m,module/
+--regex-systemverilog=/^\s*(virtual\s+)?class\s+(\w+)/\2/c,class/
+--regex-systemverilog=/^\s*interface\s+(\w+)/\1/i,interface/
+--regex-systemverilog=/^\s*package\s+(\w+)/\1/p,package/
+--regex-systemverilog=/^\s*program\s+(\w+)/\1/o,program/
+--regex-systemverilog=/^\s*(pure\s+)?(virtual\s+)?function\s+(\w+\s+)?(\w+)/\4/f,function/
+--regex-systemverilog=/^\s*(pure\s+)?(virtual\s+)?task\s+(\w+)/\3/t,task/
