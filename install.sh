@@ -50,7 +50,7 @@ if _inst_cfg vim ; then
 fi
 
 if _inst_cfg ctags ; then
-	ln -sfv $PWD/ctags.conf $HOME/.ctags
+	ln -sfv $PWD/ctags $HOME/.ctags
 fi
 
 if _inst_cfg vifm; then
