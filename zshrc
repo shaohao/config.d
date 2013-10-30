@@ -43,15 +43,6 @@ setopt appendhistory notify
 unsetopt sharehistory
 unsetopt beep
 
-# Personal scripts
-if [[ -d $HOME/.zshrc_personal.d ]]; then
-	fpath=($HOME/.zshrc_personal.d $fpath)
-	for util in $HOME/.zshrc_personal.d/[^_]*; do
-		source $util
-	done
-	unset util
-fi
-
 # Initialize completion
 autoload -Uz compinit
 compinit
@@ -65,6 +56,19 @@ then
 	unfunction precmd
 	unfunction preexec
 	PS1='$ '
+fi
+
+# config presets
+if [[ -d $HOME/.zsh.conf.d ]]; then
+	fpath=($HOME/.zsh.conf.d $fpath)
+	for conf in $HOME/.zsh.conf.d/[^_]*; do
+		source $conf
+	done
+	unset conf
+fi
+
+if [[ -r $HOME/.zsh_my ]]; then
+	. $HOME/.zsh_my
 fi
 
 # ex: ts=4 sw=4 ft=zsh

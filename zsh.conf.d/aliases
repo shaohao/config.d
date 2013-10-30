@@ -14,7 +14,7 @@ alias lld='ls -l -d */'
 alias llda='ls -l -a -d */'
 
 # rm
-alias rm='rm -vI'
+alias rm='rm -vi'
 
 # vim
 alias vim='\vim -p'

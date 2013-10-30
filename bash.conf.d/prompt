@@ -1,0 +1,33 @@
+# git
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+
+function __abbr_path() {
+  local w=$1/
+
+  local abbr_name=${__ABBR_NAME}
+  local abbr_path abbr_path_slash
+  if [[ ${__ABBR_PATH} =~ /$ ]]; then
+    abbr_path=${__ABBR_PATH%%/}
+    abbr_path_slash=${__ABBR_PATH}
+  else
+    abbr_path=${__ABBR_PATH}
+    abbr_path_slash=${__ABBR_PATH}/
+  fi
+  if [[ $abbr_name != '' && $abbr_path != '' && $w =~ ^$abbr_path_slash ]]; then
+      w=${w##${abbr_path}}
+      if [[ $w =~ /$ ]]; then
+          w=${w%%/}
+      fi
+      echo "~${abbr_name}~${w}"
+  else
+    echo $w
+  fi
+}
+
+# prompt
+#export PS1='.--[\[\e[34;1m\]$SHLVL \[\e[32;1m\]\u\[\e[35;1m\]@\[\e[36;1m\]\h\[\e[31;1m\]:\[\e[34;1m\]\w\[\e[0m\]$(__git_ps1 " :%s")]\n\`--\[\e[35;1m\]\$ \[\e[0m\]'
+export PS1='.--[\[\e[34;1m\]$SHLVL \[\e[32;1m\]\u\[\e[35;1m\]@\[\e[36;1m\]\h\[\e[31;1m\]:\[\e[34;1m\]$(__abbr_path \w)\[\e[0m\]$(__git_ps1 " :%s")]\n\`--\[\e[35;1m\]\$ \[\e[0m\]'
+
+# ex: ts=4 sw=4 ft=sh

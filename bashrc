@@ -12,14 +12,18 @@
 # Correct minor errors in a cd command
 shopt -s cdspell
 
-# Personal scripts
-if [ -d $HOME/.bashrc_personal.d ]; then
-	for util in $HOME/.bashrc_personal.d/*; do
-		if [[ -f $util ]]; then
-			. $util
+# prset files
+if [ -d $HOME/.bash.conf.d ]; then
+	for conf in $HOME/.bash.conf.d/*; do
+		if [[ -f $conf ]]; then
+			. $conf
 		fi
 	done
-	unset util
+	unset conf
+fi
+
+if [ -r $HOME/.bash_my ]; then
+	. $HOME/.bash_my
 fi
 
 # ex: ts=4 sw=4 ft=sh

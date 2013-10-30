@@ -11,12 +11,12 @@ _inst_cfg() {
 
 if _inst_cfg bash; then
 	ln -sfv $PWD/bashrc $HOME/.bashrc
-	ln -sfvT $PWD/bashrc_personal.d $HOME/.bashrc_personal.d
+	ln -sfvT $PWD/bash.conf.d $HOME/.bash.conf.d
 fi
 
 if _inst_cfg zsh ; then
 	ln -sfv $PWD/zshrc $HOME/.zshrc
-	ln -sfvT $PWD/zshrc_personal.d $HOME/.zshrc_personal.d
+	ln -sfvT $PWD/zsh.conf.d $HOME/.zsh.conf.d
 	ln -sfvT $PWD/oh-my-zsh $HOME/.oh-my-zsh
 fi
 

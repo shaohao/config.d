@@ -1,0 +1,12 @@
+# pager
+if which most &>/dev/null; then
+	export PAGER=most
+fi
+
+# editor
+export EDITOR=vim
+
+# path
+export PATH=$HOME/.local/bin:$PATH
+
+# ex: ts=4 sw=4 ft=sh
