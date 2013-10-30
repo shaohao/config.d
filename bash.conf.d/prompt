@@ -4,26 +4,26 @@ export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 
 function __abbr_path() {
-  local w=$1/
+	local w=${1%%/}
+	local w_slash=$w/
+	local w_sub
 
-  local abbr_name=${__ABBR_NAME}
-  local abbr_path abbr_path_slash
-  if [[ ${__ABBR_PATH} =~ /$ ]]; then
-    abbr_path=${__ABBR_PATH%%/}
-    abbr_path_slash=${__ABBR_PATH}
-  else
-    abbr_path=${__ABBR_PATH}
-    abbr_path_slash=${__ABBR_PATH}/
-  fi
-  if [[ $abbr_name != '' && $abbr_path != '' && $w =~ ^$abbr_path_slash ]]; then
-      w=${w##${abbr_path}}
-      if [[ $w =~ /$ ]]; then
-          w=${w%%/}
-      fi
-      echo "~${abbr_name}~${w}"
-  else
-    echo $w
-  fi
+	local abbr_name=${__ABBR_NAME:-'~'}
+	local abbr_path=${__ABBR_PATH:-~}
+	local abbr_path_slash
+
+	abbr_path=${abbr_path%%/}
+	abbr_path_slash=${abbr_path}/
+
+	if [[ $w_slash =~ ^$abbr_path_slash ]]; then
+		echo ${1/$abbr_path/$abbr_name}
+	else
+		if [[ $w_slash =~ ^$HOME/ ]]; then
+			echo ${1/$HOME/'~'}
+		else
+			echo $1
+		fi
+	fi
 }
 
 # prompt
