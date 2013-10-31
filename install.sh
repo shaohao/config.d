@@ -10,13 +10,17 @@ _inst_cfg() {
 }
 
 if _inst_cfg bash; then
-	ln -sfv $PWD/bashrc $HOME/.bashrc
-	ln -sfvT $PWD/bash.conf.d $HOME/.bash.conf.d
+	cat <<EOC
+Paste below content into your own bashrc file:
+test -r "$PWD/bashrc" && . "$PWD/bashrc"
+EOC
 fi
 
 if _inst_cfg zsh ; then
-	ln -sfv $PWD/zshrc $HOME/.zshrc
-	ln -sfvT $PWD/zsh.conf.d $HOME/.zsh.conf.d
+	cat <<EOC
+Paste below content into your own zshrc file:
+test -r "$PWD/zshrc" && . "$PWD/zshrc"
+EOC
 	ln -sfvT $PWD/oh-my-zsh $HOME/.oh-my-zsh
 fi
 
@@ -30,10 +34,14 @@ if _inst_cfg git; then
 	ln -sfv $PWD/gitconfig $HOME/.gitconfig
 	ln -sfv $PWD/cvsignore $HOME/.cvsignore
 	if [ -f /usr/share/git/git-prompt.sh ]; then
-		ln -sfv /usr/share/git/git-prompt.sh $PWD/bashrc_personal.d/git-prompt
+		ln -sfv /usr/share/git/git-prompt.sh $HOME/.git-prompt
 	elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
-		ln -sfv /usr/share/git-core/contrib/completion/git-prompt.sh $PWD/bashrc_personal.d/git-prompt
+		ln -sfv /usr/share/git-core/contrib/completion/git-prompt.sh $HOME/.git-prompt
 	fi
+	cat <<EOC
+Paste below content into your $HOME/.bashrc file:
+[[ -r $HOME/.git-prompt ]] && . $HOME/.git-prompt
+EOC
 fi
 
 if _inst_cfg rxvt-unicode ; then

@@ -1,3 +1,5 @@
+__zshrc=$_
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -59,16 +61,14 @@ then
 fi
 
 # config presets
-if [[ -d $HOME/.zsh.conf.d ]]; then
-	fpath=($HOME/.zsh.conf.d $fpath)
-	for conf in $HOME/.zsh.conf.d/[^_]*; do
-		source $conf
+if [[ -d ${__zshrc%/*}/zsh.conf.d ]]; then
+	fpath=(${__zshrc%/*}/zsh.conf.d $fpath)
+	for conf in ${__zshrc%/*}/zsh.conf.d/[^_]*; do
+		[[ -r $conf ]] && . $conf
 	done
 	unset conf
 fi
 
-if [[ -r $HOME/.zsh_my ]]; then
-	. $HOME/.zsh_my
-fi
+unset __zshrc
 
 # ex: ts=4 sw=4 ft=zsh
