@@ -38,7 +38,7 @@ if _inst_cfg git; then
 	elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
 		ln -sfv /usr/share/git-core/contrib/completion/git-prompt.sh $HOME/.git-prompt
 	else
-		echo "Make a symbolic link to git-prompt.sh at $HOME/.git-prompt manually!"
+		echo "You need create the $HOME/.git-prompt manually!"
 	fi
 fi
 
@@ -51,7 +51,7 @@ if _inst_cfg tmux ; then
 fi
 
 if _inst_cfg vim ; then
-	ln -sfv $PWD/vimrc $HOME/.vimrc
+	cp -iv $PWD/vimrc $HOME/.vimrc
 	ln -sfvT $PWD/vimfiles $HOME/.vim
 fi
 
