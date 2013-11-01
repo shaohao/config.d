@@ -37,11 +37,9 @@ if _inst_cfg git; then
 		ln -sfv /usr/share/git/git-prompt.sh $HOME/.git-prompt
 	elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
 		ln -sfv /usr/share/git-core/contrib/completion/git-prompt.sh $HOME/.git-prompt
+	else
+		echo "Make a symbolic link to git-prompt.sh at $HOME/.git-prompt manually!"
 	fi
-	cat <<EOC
-Paste below content into your $HOME/.bashrc file:
-[[ -r $HOME/.git-prompt ]] && . $HOME/.git-prompt
-EOC
 fi
 
 if _inst_cfg rxvt-unicode ; then

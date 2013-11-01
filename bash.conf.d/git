@@ -1,0 +1,3 @@
+test -r $HOME/.git-prompt && . $HOME/.git-prompt
+
+# ex: ts=4 sw=4 ft=sh
