@@ -145,7 +145,7 @@ filextype *.ps,*.ps.gz gv %c %i &
 filextype *.djvu apvlv %f
 
 " Audio
-filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a
+filetype *.wav,*.mp3,*.wma,*.flac,*.ogg,*.m4a
        \ {Play using ffplay}
        \ ffplay %c,
        \ {Play using MPlayer}
@@ -195,7 +195,7 @@ fileviewer *.tar,*.tar.bz2,*.tbz2,*.tar.gz,*.tgz,*.tar.xz,*.txz tar -tvf %c
 " SshMount
 filetype *.sshfs
        \ {Mount with sshfs}
-       \ FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR,
+       \ FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR %CLEAR,
 
 " FtpMount
 filetype *.ftp
