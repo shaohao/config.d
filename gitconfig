@@ -1,9 +1,0 @@
-[core]
-	editor = vim
-	excludesfile = ~/.cvsignore
-[color]
-	ui = auto
-[credential]
-	helper = cache
-[push]
-	default = simple

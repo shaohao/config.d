@@ -1,6 +1,0 @@
-#compdef backup
-
-_arguments \
-	':Compress\ type:(tar gzip bzip2 xz p7zip)' \
-	':items:_files'
-

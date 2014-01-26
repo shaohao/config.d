@@ -1,8 +1,14 @@
-config.d
+vimfiles
 ========
 
-My home configurations
+My Vim configuratons
 
-Clone this repository in to ~/.config.d
+Clone this repository in to ~/.vim
+Need a ~/.vimrc file created like below:
 
-Use `ln' to link the desired files/directories into ~/
+" Read ~/.vim/vimrc file
+runtime vimrc
+
+" Customized color scheme
+colorscheme ir_black
+
