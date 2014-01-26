@@ -21,7 +21,7 @@ ddb_status() {
 goa_status() {
 	local _obj=$1 val
 
-	if [ `pgrep -f 'goagent\/.*proxy\.py'` ]; then
+	if [ `pgrep -f 'goagent'` ]; then
 		val='"full_text":"goa: yes","color":"#00FF00"'
 	else
 		val='"full_text":"goa: no","color":"#FF0000"'
@@ -68,12 +68,12 @@ do
 	ddb_status ddb_obj
 
 	# go-agent
-	goa_status goa_obj
+#	goa_status goa_obj
 
 	# net speed
 	net_status net_obj
 
-	obj="$ddb_obj,$goa_obj,$net_obj"
+	obj="$ddb_obj,$net_obj"
 
 	echo $line | sed "s/\[{/[$obj,{/"
 done
