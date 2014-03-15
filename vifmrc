@@ -125,6 +125,7 @@ command zip zip -r %f.zip %f
 command run !! ./%f
 command make !!make
 command vgrep vim "+grep %a"
+command rsync rsync -aPh %f %D
 
 " The file type is for the default programs to be used with
 " a file extension.
@@ -195,7 +196,7 @@ fileviewer *.tar,*.tar.bz2,*.tbz2,*.tar.gz,*.tgz,*.tar.xz,*.txz tar -tvf %c
 " SshMount
 filetype *.sshfs
        \ {Mount with sshfs}
-       \ FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR %CLEAR,
+       \ FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR,
 
 " FtpMount
 filetype *.ftp
@@ -286,3 +287,4 @@ nmap <f6> :move<cr>
 nmap <f7> :mkdir<space>
 nmap <f8> :delete<cr>
 nmap <f9> :touch<space>
+nmap <f10> :rsync<cr>
