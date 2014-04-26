@@ -1,6 +1,8 @@
 [core]
 	editor = vim
 	excludesfile = ~/.cvsignore
+	autocrlf = input
+	safecrlf = true
 [color]
 	ui = auto
 [credential]
