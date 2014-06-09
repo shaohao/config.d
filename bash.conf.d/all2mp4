@@ -1,0 +1,34 @@
+all2mp4() {
+	local ifile ofile
+	local oformat
+	local iacodec acodec
+	local vinfo vres vbr vcodec
+
+	if [[ $# -lt 2 ]]; then
+		echo "Usage: rmvb2mp4 input.rmvb output.mp4"
+		exit 1
+	fi
+
+	ifile=$1
+	ofile=$2
+	oformat=mp4
+
+	iacodec=$(ffmpeg -i $ifile 2>&1 | sed -n 's/\s*Stream\s*.*\s*Audio:\s*\(\w\+\)\s*.*/\1/gp')
+	acodec=aac
+	if [[ $iacodec =~ mp3\|aac ]]; then
+		acodec=copy
+	fi
+
+	vinfo=$(ffmpeg -i $ifile 2>&1 | sed -n 's/\s*Stream\s*.*\s*Video:\s*.*\s\+\([0-9]\+x[0-9]\+\),.*\s\+\([0-9]\+\)\s*kb\/s,.*/\1 \2/gp')
+	vres=$(echo $vinfo | awk '{ print $1; }')
+	vbr=$(echo $vinfo | awk '{ print $2; }')
+	vcodec=libx264
+
+	# 1-pass
+	ffmpeg -i "$ifile" -an -vcodec $vcodec -b:v ${vbr}k -pass 1 -f $oformat -y /dev/null
+
+	# 2-pass
+	ffmpeg -i "$ifile" -strict -2 -acodec $acodec -vcodec $vcodec -b:v ${vbr}k -pass 2 -f $oformat $ofile
+}
+
+# ex: ts=4 sw=4 ft=sh
