@@ -22,10 +22,8 @@ all2mp4() {
 		vbr=$(echo $vinfo | awk '{ print $2; }')
 		vcodec=libx264
 
-		# 1-pass
-		ffmpeg -i "$ifile" -an -vcodec $vcodec -b:v ${vbr}k -pass 1 -f $oformat -y /dev/null
-
-		# 2-pass
+		# Two-pass
+		ffmpeg -i "$ifile" -an -vcodec $vcodec -b:v ${vbr}k -pass 1 -f $oformat -y /dev/null && \
 		ffmpeg -i "$ifile" -strict -2 -acodec $acodec -vcodec $vcodec -b:v ${vbr}k -pass 2 -f $oformat $ofile
 	fi
 }
