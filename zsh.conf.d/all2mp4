@@ -30,4 +30,4 @@ all2mp4() {
 	fi
 }
 
-# ex: ts=4 sw=4 ft=sh
+# ex: ts=4 sw=4 ft=zsh
