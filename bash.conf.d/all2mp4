@@ -13,7 +13,7 @@ all2mp4() {
 
 		iacodec=$(ffmpeg -i $ifile 2>&1 | sed -n 's/\s*Stream\s*.*\s*Audio:\s*\(\w\+\)\s*.*/\1/gp')
 		acodec=aac
-		if [[ $iacodec =~ mp3\|aac ]]; then
+		if [[ $iacodec =~ mp3\|aac\|ac3 ]]; then
 			acodec=copy
 		fi
 
