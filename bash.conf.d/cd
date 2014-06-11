@@ -1,6 +1,9 @@
 function cd() {
-	builtin cd "$*"
-	ls
+	if [[ $# -lt 1 ]]; then
+		builtin cd $HOME && ls
+	else
+		builtin cd "$*" && ls
+	fi
 }
 
 # ex: ts=4 sw=4 ft=sh
