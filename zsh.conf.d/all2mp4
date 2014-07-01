@@ -1,26 +1,39 @@
 all2mp4() {
 	local ifile ofile
 	local oformat
-	local iacodec acodec
+	local finfo fbr
+	local ainfo abr acodec
 	local vinfo vres vbr vcodec
 
 	if [[ $# -lt 2 ]]; then
-		echo "Usage: rmvb2mp4 input.rmvb output.mp4"
+		echo "Usage: all2mp4 input output.mp4"
 	else
 		ifile=$1
 		ofile=$2
 		oformat=mp4
 
-		iacodec=$(ffmpeg -i $ifile 2>&1 | sed -n 's/\s*Stream\s*.*\s*Audio:\s*\(\w\+\)\s*.*/\1/gp')
-		acodec=aac
-		if [[ $iacodec =~ mp3\|aac\|ac3 ]]; then
+		finfo=$(ffmpeg -i $ifile 2>&1 | sed -n 's/\s*Duration:\s*\([0-9:.]\+\).*\s\+\([0-9]\+\)\s*kb\/s.*/\1 \2/gp')
+		fbr=$(echo $finfo | awk '{ print $2; }')
+
+		ainfo=$(ffmpeg -i $ifile 2>&1 | sed -n 's/\s*Stream\s*.*\s*Audio:\s*\(\w\+\)\s*.*\s\+\([0-9]\+\)\s*kb\/s.*/\1 \2/gp')
+		acodec=$(echo $ainfo | awk '{ print $1; }')
+		abr=$(echo $ainfo | awk '{ print $2; }')
+
+		if [[ $acodec =~ mp3\|aac\|ac3 ]]; then
 			acodec=copy
+		else
+			acodec=aac
 		fi
 
 		vinfo=$(ffmpeg -i $ifile 2>&1 | sed -n 's/\s*Stream\s*.*\s*Video:\s*.*\s\+\([0-9]\+x[0-9]\+\),.*\s\+\([0-9]\+\)\s*kb\/s,.*/\1 \2/gp')
 		vres=$(echo $vinfo | awk '{ print $1; }')
 		vbr=$(echo $vinfo | awk '{ print $2; }')
 		vcodec=libx264
+
+		# No video bitrate, calculate from file info
+		if [[ x"$vbr" == x ]]; then
+			vbr=$(echo $fbr $abr | awk '{ print ($1-$2); }')
+		fi
 
 		# Two-pass
 		if [[ ! -f ffmpeg2pass-0.log || ! -f ffmpeg2pass-0.log.mbtree ]]; then
