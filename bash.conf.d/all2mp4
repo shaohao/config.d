@@ -19,7 +19,7 @@ all2mp4() {
 		acodec=$(echo $ainfo | awk '{ print $1; }')
 		abr=$(echo $ainfo | awk '{ print $2; }')
 
-		if [[ $acodec =~ mp3|aac|ac3 ]]; then
+		if [[ $acodec == mp3 || $acodec == aac || $acodec == ac3 ]]; then
 			acodec=copy
 		else
 			acodec=aac
