@@ -5,27 +5,27 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 
 function __abbr_path() {
 	local w w_slash
-	eval w=${1%%/}
-	eval w_slash=$w/
+	eval w=\"${1%%/}\"
+	eval w_slash=\"$w/\"
 
 	local abbr_name abbr_path abbr_path_slash
-	eval abbr_name=${__ABBR_NAME:-'\~'}
-	eval abbr_path=${__ABBR_PATH:-$HOME}
+	eval abbr_name=\"${__ABBR_NAME:-'\~'}\"
+	eval abbr_path=\"${__ABBR_PATH:-$HOME}\"
 
-	abbr_path=${abbr_path%%/}
-	abbr_path_slash=${abbr_path}/
+	abbr_path="${abbr_path%%/}"
+	abbr_path_slash="${abbr_path}/"
 
-	if [[ $w_slash =~ ^$abbr_path_slash ]]; then
-		w=${w/$abbr_path/$abbr_name}
-		if [[ $w/ =~ ^$HOME/ ]]; then
-			w=${w/$HOME/'\~'}
+	if [[ "$w_slash" =~ ^$abbr_path_slash ]]; then
+		w="${w/$abbr_path/$abbr_name}"
+		if [[ "$w/" =~ ^$HOME/ ]]; then
+			w="${w/$HOME/'\~'}"
 		fi
-		echo $w
+		echo "$w"
 	else
-		if [[ $w_slash =~ ^$HOME/ ]]; then
-			echo ${1/$HOME/'\~'}
+		if [[ "$w_slash" =~ ^$HOME/ ]]; then
+			echo "${1/$HOME/'\~'}"
 		else
-			echo $1
+			echo "$1"
 		fi
 	fi
 }
