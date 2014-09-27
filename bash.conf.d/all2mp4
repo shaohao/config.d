@@ -36,10 +36,12 @@ all2mp4() {
 		fi
 
 		# Two-pass
-		if [[ ! -f ffmpeg2pass-0.log || ! -f ffmpeg2pass-0.log.mbtree ]]; then
-			ffmpeg -i "$ifile" -an -vcodec $vcodec -b:v ${vbr}k -pass 1 -f $oformat -y /dev/null
-		fi
-		ffmpeg -i "$ifile" -strict -2 -acodec $acodec -vcodec $vcodec -b:v ${vbr}k -pass 2 -f $oformat "$ofile"
+		time {
+			if [[ ! -f ffmpeg2pass-0.log || ! -f ffmpeg2pass-0.log.mbtree ]]; then
+				ffmpeg -i "$ifile" -an -vcodec $vcodec -b:v ${vbr}k -pass 1 -f $oformat -y /dev/null
+			fi
+			ffmpeg -i "$ifile" -strict -2 -acodec $acodec -vcodec $vcodec -b:v ${vbr}k -pass 2 -f $oformat "$ofile"
+		}
 		rm -rf ffmpeg2pass-0.log*
 	fi
 }
