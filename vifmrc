@@ -154,7 +154,7 @@ filetype *.wav,*.mp3,*.wma,*.flac,*.ogg,*.m4a
 fileviewer *.mp3 mp3info
 
 " Video
-filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv,*.rmvb,*.m2v
+filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv,*.rmvb,*.m2v,*.mov,*.webm
         \ {View using mplayer}
         \ mplayer %f,
         \ {View using mpv}
