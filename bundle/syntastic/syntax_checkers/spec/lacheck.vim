@@ -1,5 +1,5 @@
 "============================================================================
-"File:        pep8.vim
+"File:        rpmlint.vim
 "Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  LCD 47 <lcd047 at gmail dot com>
 "License:     This program is free software. It comes without any warranty,
@@ -9,40 +9,33 @@
 "             See http://sam.zoy.org/wtfpl/COPYING for more details.
 "
 "============================================================================
-"
-" For details about pep8 see: https://github.com/jcrocholl/pep8
 
-if exists("g:loaded_syntastic_python_pep8_checker")
+if exists('g:loaded_syntastic_spec_rpmlint_checker')
     finish
 endif
-let g:loaded_syntastic_python_pep8_checker = 1
+let g:loaded_syntastic_spec_rpmlint_checker = 1
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! SyntaxCheckers_python_pep8_GetLocList() dict
+function! SyntaxCheckers_spec_rpmlint_GetLocList() dict
     let makeprg = self.makeprgBuild({})
 
-    let errorformat = '%f:%l:%c: %m'
+    let errorformat =
+        \ '%E%f:%l: E: %m,' .
+        \ '%E%f: E: %m,' .
+        \ '%W%f:%l: W: %m,' .
+        \ '%W%f: W: %m,' .
+        \ '%-G%.%#'
 
-    let env = syntastic#util#isRunningWindows() ? {} : { 'TERM': 'dumb' }
-
-    let loclist = SyntasticMake({
+    return SyntasticMake({
         \ 'makeprg': makeprg,
-        \ 'errorformat': errorformat,
-        \ 'env': env,
-        \ 'subtype': 'Style' })
-
-    for e in loclist
-        let e['type'] = e['text'] =~? '^W' ? 'W' : 'E'
-    endfor
-
-    return loclist
+        \ 'errorformat': errorformat })
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
-    \ 'filetype': 'python',
-    \ 'name': 'pep8'})
+    \ 'filetype': 'spec',
+    \ 'name': 'rpmlint'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
