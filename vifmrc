@@ -143,7 +143,7 @@ fileview *.pdf pdftotext -nopgbrk %c -
 filextype *.ps,*.ps.gz gv %c %i &
 
 " Djvu
-filextype *.djvu apvlv %f
+filextype *.djvu zathura %f,apvlv %f
 
 " Audio
 filetype *.wav,*.mp3,*.wma,*.flac,*.ogg,*.m4a
