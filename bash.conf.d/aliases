@@ -12,6 +12,7 @@ alias lsda='ls -a -d */'
 alias lla='ls -l -a'
 alias lld='ls -l -d */'
 alias llda='ls -l -a -d */'
+alias llh='ls -l -h'
 
 # rm
 alias rm='rm -vi'

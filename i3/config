@@ -165,4 +165,4 @@ for_window [class="^feh$"] floating enable
 for_window [class="^mpv$"] floating enable
 
 # windows position
-assign [class="^Chromium$"] 3
+assign [class="^chromium$"] 3

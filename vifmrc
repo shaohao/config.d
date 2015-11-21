@@ -8,7 +8,7 @@
 " ------------------------------------------------------------------------------
 
 " This is the actual command used to start vi.  The default is vim.
-" If you would like to use another vi clone such Elvis or Vile
+" If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
 
 set vicmd=vim
@@ -75,7 +75,7 @@ set fusehome=/tmp/vifm_FUSE
 
 set timefmt=%m/%d\ %H:%M
 
-" Show list of matches on tab complition in command-line mode
+" Show list of matches on tab completion in command-line mode
 
 set wildmenu
 
@@ -96,7 +96,7 @@ set incsearch
 
 set scrolloff=4
 
-" Don't do to much requests to slow file systems
+" Don't do too many requests to slow file systems
 
 set slowfs=curlftpfs
 
@@ -108,8 +108,8 @@ set statusline="  %t%= %A %10u:%-7g %15s %20d  "
 
 " :mark mark /full/directory/path [filename]
 
-mark b ~/bin/
 mark h /mnt/vg_00/home/jinxin
+mark m /media
 
 " ------------------------------------------------------------------------------
 
@@ -192,7 +192,9 @@ fileviewer *.mp3 mp3info
 fileviewer *.flac soxi
 
 " Video
-filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv,*.m2v,*.mov,*.webm,*.ts,*.m4v
+filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv,*.m2v,*.mov,*.webm,*.ts,*.m4v,*.rmvb
+        \ {View using mpv}
+        \ mpv %f,
         \ {View using ffplay}
         \ ffplay -fs %c,
         \ {View using Dragon}
@@ -216,8 +218,8 @@ filetype *.html,*.htm links, lynx
 filetype *.o nm %f | less
 
 " Man page
-filetype *.[1-8] gtbl %c | groff -Tascii -man | less
-fileviewer *.[1-8] gtbl %c | groff -Tascii -man | col -b
+filetype *.[1-8] man ./%c
+fileviewer *.[1-8] man ./%c | col -b
 
 " Image
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
@@ -227,6 +229,8 @@ filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ sxiv,
         \ {View in gpicview}
         \ gpicview %c,
+        \ {View in shotwell}
+        \ shotwell,
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm convert -identify %f -verbose /dev/null
 
 " MD5
@@ -244,17 +248,17 @@ filetype *.torrent ktorrent %f &
 fileviewer *.torrent dumptorrent -v %c
 
 " FuseZipMount
-filetype *.zip,*.jar,*.war,*.ear,*.oxt
-       \ {Mount with fuse-zip}
-       \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
-       \ {View contents}
-       \ zip -sf %c | less,
-       \ {Extract here}
-       \ tar -xf %c,
-fileviewer *.zip,*.jar,*.war,*.ear,*.oxt zip -sf %c
+"filetype *.zip,*.jar,*.war,*.ear,*.oxt
+"       \ {Mount with fuse-zip}
+"       \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
+"       \ {View contents}
+"       \ zip -sf %c | less,
+"       \ {Extract here}
+"       \ tar -xf %c,
+"fileviewer *.zip,*.jar,*.war,*.ear,*.oxt zip -sf %c
 
 " ArchiveMount
-filetype *.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz,*.gz
+filetype *.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz,*.gz,*.zip
        \ {Mount with archivemount}
        \ FUSE_MOUNT|archivemount %SOURCE_FILE %DESTINATION_DIR,
 fileviewer *.tgz,*.tar.gz tar -tzf %c
@@ -342,7 +346,7 @@ fileviewer .*/,*/ tree %f
 " Like in previous versions of vifm
 " set vifminfo=options,filetypes,commands,bookmarks,dhistory,state,cs
 " Like in vi
-set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
+set vifminfo=chistory,state,tui,shistory,
     \phistory,fhistory,dirstack,registers,bookmarks
 
 " ------------------------------------------------------------------------------
