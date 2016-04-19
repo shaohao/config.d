@@ -16,5 +16,7 @@ if which fcitx &>/dev/null; then
 	fcitx &
 fi
 
+export ALSA_CARD=G4ME1
+
 # PC Speaker
 xset -b

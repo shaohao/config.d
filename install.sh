@@ -60,11 +60,7 @@ if _inst_cfg ctags ; then
 fi
 
 if _inst_cfg vifm; then
-	ln -sfv $PWD/vifmrc $HOME/.vifm/vifmrc
-fi
-
-if _inst_cfg most ; then
-	ln -sfv $PWD/mostrc $HOME/.mostrc
+	ln -sfv $PWD/vifmrc $HOME/.config/vifm/vifmrc
 fi
 
 # ex: ts=4 sw=4 ft=sh

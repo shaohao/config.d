@@ -1,5 +1,6 @@
 #!/bin/bash
 
+git subtree pull --prefix=bundle/vim-go        https://github.com/fatih/vim-go.git             master --squash
 git subtree pull --prefix=bundle/neocomplcache https://github.com/Shougo/neocomplcache.vim.git master --squash
 git subtree pull --prefix=bundle/syntastic     https://github.com/scrooloose/syntastic.git     master --squash
 git subtree pull --prefix=bundle/tagbar        https://github.com/majutsushi/tagbar.git        master --squash
