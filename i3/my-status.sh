@@ -46,8 +46,8 @@ net_status() {
 
 	local c_rx c_tx
 	local a_rx a_tx
-	read c_rx < /sys/devices/pci0000\:00/0000\:00\:19.0/net/eno1/statistics/rx_bytes
-	read c_tx < /sys/devices/pci0000\:00/0000\:00\:19.0/net/eno1/statistics/tx_bytes
+	read c_rx < /sys/devices/pci0000\:00/0000\:00\:19.0/net/eth0/statistics/rx_bytes
+	read c_tx < /sys/devices/pci0000\:00/0000\:00\:19.0/net/eth0/statistics/tx_bytes
 	a_rx=$(cal_speed $c_rx $p_rx)
 	a_tx=$(cal_speed $c_tx $p_tx)
 
