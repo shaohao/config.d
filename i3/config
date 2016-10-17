@@ -163,6 +163,7 @@ new_window 1pixel
 for_window [class="^Deadbeef$"] floating enable
 for_window [class="^feh$"] floating enable
 for_window [class="^mpv$"] floating enable
+for_window [class="^TeamViewer$"] floating enable
 
 # windows position
 assign [class="^chromium$"] 3
