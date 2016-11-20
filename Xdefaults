@@ -19,7 +19,7 @@ URxvt.color12:            #839496
 URxvt.color13:            #6c71c4
 URxvt.color14:            #93a1a1
 URxvt.color15:            #fdf6e3
-#URxvt.colorBD:            color
+!URxvt.colorBD:            color
 !URxvt.colorIT:            color
 !URxvt.colorUL:            color
 URxvt.underlineColor:     yellow
@@ -43,10 +43,10 @@ URxvt.troughColor:        #969696
 !URxvt.borderColor:        color
 !URxvt.backgroundPixmap:   I_Like_It_Black.png;:tile
 !URxvt.path:               /home/jinxin/图片/Backgrounds
-URxvt.font:               xft:Inconsolata:pixelsize=18:antialias=true,xft:wqy-microhei:pixelsize=18:antialias=true
-URxvt.boldFont:           xft:Inconsolata:bold:pixelsize=18:antialias=true,xft:wqy-microhei:bold:pixelsize=18:antialias=true
-URxvt.italicFont:         xft:Inconsolata:italic:pixelsize=18:antialias=true,xft:wqy-microhei:italic:pixelsize=18:antialias=true
-URxvt.boldItalicFont:     xft:Inconsolata:bold:italic:pixelsize=18:antialias=true,xft:wqy-microhei:bold:italic:pixelsize=18:antialias=true
+URxvt.font:               xft:Inconsolata for Powerline:pixelsize=18:antialias=true,xft:wqy-microhei:pixelsize=18:antialias=true
+URxvt.boldFont:           xft:Inconsolata for Powerline:bold:pixelsize=18:antialias=true,xft:wqy-microhei:bold:pixelsize=18:antialias=true
+URxvt.italicFont:         xft:Inconsolata for Powerline:italic:pixelsize=18:antialias=true,xft:wqy-microhei:italic:pixelsize=18:antialias=true
+URxvt.boldItalicFont:     xft:Inconsolata for Powerline:bold:italic:pixelsize=18:antialias=true,xft:wqy-microhei:bold:italic:pixelsize=18:antialias=true
 URxvt.intensityStyles:    true
 URxvt.title:              Terminal
 URxvt.iconName:           Terminal

@@ -37,8 +37,4 @@ alias update='sudo pacman -Syu'
 alias clean='sudo pacman -Sc --noconfirm'
 alias search='pacman -Ss'
 
-# readline support for tclsh/wish
-alias tclsh='socat READLINE EXEC:"tclsh",pty,setsid,ctty'
-alias wish='socat READLINE EXEC:"wish",pty,setsid,ctty'
-
 # ex: ts=4 sw=4 filetype=sh

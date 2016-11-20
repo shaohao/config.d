@@ -42,6 +42,11 @@ if _inst_cfg git; then
 	fi
 fi
 
+if _inst_cfg powerline-fonts; then
+	ln -sfvT $PWD/fonts $HOME/.fonts
+	fc-cache -fv $HOME/.fonts
+fi
+
 if _inst_cfg rxvt-unicode ; then
 	ln -sfv $PWD/Xdefaults $HOME/.Xdefaults
 fi
