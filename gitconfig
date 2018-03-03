@@ -9,3 +9,6 @@
 	helper = cache
 [push]
 	default = simple
+[user]
+	email = shaohao@outlook.com
+	name = shaohao

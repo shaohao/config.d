@@ -129,7 +129,7 @@ command! make !!make %a
 command! mkcd :mkdir %a | cd %a
 command! vgrep vim "+grep %a"
 command! reload :write | restart
-command rsync rsync -aPh %f %D
+command rsync rsync -aPSh %f %D
 
 " ------------------------------------------------------------------------------
 

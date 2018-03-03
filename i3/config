@@ -159,11 +159,10 @@ bar {
 new_window 1pixel
 
 # floating windows
-#for_window [class="^Chromium$"] floating enable
 for_window [class="^Deadbeef$"] floating enable
 for_window [class="^feh$"] floating enable
 for_window [class="^mpv$"] floating enable
 for_window [class="^TeamViewer$"] floating enable
 
 # windows position
-assign [class="^chromium$"] 3
+assign [class="^Chromium$"] 3
