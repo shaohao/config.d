@@ -65,7 +65,7 @@ do
 	read line
 
 	# deadbeef
-	ddb_status ddb_obj
+#	ddb_status ddb_obj
 
 	# go-agent
 #	goa_status goa_obj
@@ -73,7 +73,7 @@ do
 	# net speed
 	net_status net_obj
 
-	obj="$ddb_obj,$net_obj"
+	obj="$net_obj"
 
 	echo $line | sed "s/\[{/[$obj,{/"
 done
