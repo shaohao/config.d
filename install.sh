@@ -43,8 +43,8 @@ if _inst_cfg git; then
 fi
 
 if _inst_cfg powerline-fonts; then
-	ln -sfvT $PWD/fonts $HOME/.fonts
-	fc-cache -fv $HOME/.fonts
+	ln -sfvT $PWD/fonts $HOME/.local/share/fonts
+	fc-cache -fv $HOME/.local/share/fonts
 fi
 
 if _inst_cfg rxvt-unicode ; then
