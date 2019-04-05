@@ -33,7 +33,7 @@ alias info='info --vi-keys'
 alias webgrab='wget -r -p -k -np'
 
 # arch
-alias update='sudo pacman -Syu'
+alias update='sudo pacman -Syu && sync'
 alias clean='sudo pacman -Sc --noconfirm'
 alias search='pacman -Ss'
 
