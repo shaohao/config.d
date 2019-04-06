@@ -80,32 +80,18 @@
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-disconnected": "Disconnected ⚠"
     },
-    "pulseaudio": {
-        //"scroll-step": 1,
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
-        "format-muted": "",
-        "format-icons": {
-            "headphones": "",
-            "handsfree": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", ""]
-        },
-        "on-click": "pavucontrol"
-    },
     "custom/alsa": {
-        "format": "",
-        "tooltip": "",
-        "on-click": "amixer-c 1 sset Master mute",
-        "on-scroll-up": "amixer -c 1 sset Master 1+",
-        "on-scroll-down": "amixer -c 1 sset Master 1-"
+        "exec": "$HOME/.config/waybar/alsa.sh",
+//        "return-type": "json",
+        "interval": 1,
+        "format": "{}",
+        "on-click": "$HOME/.config/waybar/alsa.sh toggle",
+        "on-scroll-up": "$HOME/.config/waybar/alsa.sh 1%+",
+        "on-scroll-down": "$HOME/.config/waybar/alsa.sh 1%-"
     },
     "custom/netspeed": {
         "format": "{}",
         "max-length": 40,
-        "exec": "$HOME/.config/sway/net-speed.sh"
+        "exec": "$HOME/.config/waybar/net-speed.sh"
     }
 }
