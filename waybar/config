@@ -83,11 +83,13 @@
     "custom/alsa": {
         "exec": "$HOME/.config/waybar/alsa.sh",
 //        "return-type": "json",
-        "interval": 1,
+        "interval": "once",
         "format": "{}",
-        "on-click": "$HOME/.config/waybar/alsa.sh toggle",
-        "on-scroll-up": "$HOME/.config/waybar/alsa.sh 1%+",
-        "on-scroll-down": "$HOME/.config/waybar/alsa.sh 1%-"
+        "on-click"       : "$HOME/.config/waybar/alsa.sh switch && pkill -RTMIN+1 waybar",
+        "on-click-right" : "$HOME/.config/waybar/alsa.sh toggle && pkill -RTMIN+1 waybar",
+        "on-scroll-up"   : "$HOME/.config/waybar/alsa.sh 1%+    && pkill -RTMIN+1 waybar",
+        "on-scroll-down" : "$HOME/.config/waybar/alsa.sh 1%-    && pkill -RTMIN+1 waybar",
+        "signal": 1
     },
     "custom/netspeed": {
         "format": "{}",
