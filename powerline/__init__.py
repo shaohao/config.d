@@ -298,6 +298,18 @@ def create_logger(common_config, use_daemon_threads=True, ext='__unknown__',
 	return logger, pl, get_module_attr
 
 
+def get_default_theme(is_unicode=True):
+	'''Get default theme used by powerline
+
+	:param bool is_unicode:
+		If true, return theme for unicode environments, otherwise return theme 
+		that is supposed to be ASCII-only.
+
+	:return: theme name.
+	'''
+	return 'powerline_terminus' if is_unicode else 'ascii'
+
+
 def finish_common_config(encoding, common_config):
 	'''Add default values to common config and expand ~ in paths
 
@@ -309,10 +321,8 @@ def finish_common_config(encoding, common_config):
 		paths.
 	'''
 	encoding = encoding.lower()
-	if encoding.startswith('utf') or encoding.startswith('ucs'):
-		default_top_theme = 'powerline'
-	else:
-		default_top_theme = 'ascii'
+	default_top_theme = get_default_theme(
+		encoding.startswith('utf') or encoding.startswith('ucs'))
 
 	common_config = common_config.copy()
 	common_config.setdefault('default_top_theme', default_top_theme)
@@ -407,6 +417,11 @@ def _get_log_keys(common_config):
 	return dict((
 		(k, v) for k, v in common_config.items() if k in LOG_KEYS
 	))
+
+
+DEFAULT_UPDATE_INTERVAL = 2
+'''Default value for :ref:`update_interval <config-ext-update_interval>`
+'''
 
 
 class Powerline(object):
@@ -504,6 +519,7 @@ class Powerline(object):
 		self.setup_args = ()
 		self.setup_kwargs = {}
 		self.imported_modules = set()
+		self.update_interval = DEFAULT_UPDATE_INTERVAL
 
 	get_encoding = staticmethod(get_preferred_output_encoding)
 	'''Get encoding used by the current application
@@ -628,6 +644,7 @@ class Powerline(object):
 					or self.ext_config.get('local_themes') != self.prev_ext_config.get('local_themes')
 				):
 					self.renderer_options['local_themes'] = self.get_local_themes(self.ext_config.get('local_themes'))
+				self.update_interval = self.ext_config.get('update_interval', 2)
 				load_colorscheme = (
 					load_colorscheme
 					or not self.prev_ext_config

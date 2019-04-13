@@ -1,20 +1,15 @@
-#!/bin/sh
-. tests/common.sh
+#!/bin/bash
+. tests/shlib/common.sh
+. tests/shlib/vterm.sh
 
-enter_suite tmux
+enter_suite tmux final
 
-rm -rf tests/vterm_tmux
-mkdir tests/vterm_tmux
-mkdir tests/vterm_tmux/path
+vterm_setup
 
-ln -s "$(which "${PYTHON}")" tests/vterm_tmux/path/python
-ln -s "$(which bash)" tests/vterm_tmux/path
-ln -s "$(which env)" tests/vterm_tmux/path
-ln -s "$(which cut)" tests/vterm_tmux/path
-ln -s "$PWD/scripts/powerline-render" tests/vterm_tmux/path
-ln -s "$PWD/scripts/powerline-config" tests/vterm_tmux/path
-
-cp -r tests/terminfo tests/vterm_tmux
+ln -s "$(which env)" "$TEST_ROOT/path"
+ln -s "$(which cut)" "$TEST_ROOT/path"
+ln -s "$ROOT/scripts/powerline-render" "$TEST_ROOT/path"
+ln -s "$ROOT/scripts/powerline-config" "$TEST_ROOT/path"
 
 test_tmux() {
 	if test "$PYTHON_IMPLEMENTATION" = PyPy; then
@@ -25,17 +20,18 @@ test_tmux() {
 	if ! which "${POWERLINE_TMUX_EXE}" ; then
 		return 0
 	fi
-	ln -sf "$(which "${POWERLINE_TMUX_EXE}")" tests/vterm_tmux/path
-	f=tests/test_in_vterm/test_tmux.py
-	if ! "${PYTHON}" $f ; then
+	ln -sf "$(which "${POWERLINE_TMUX_EXE}")" "$TEST_ROOT/path/tmux"
+	f="$ROOT/tests/test_in_vterm/test_tmux.py"
+	if ! "${PYTHON}" "$f" ; then
 		local test_name="$("$POWERLINE_TMUX_EXE" -V 2>&1 | cut -d' ' -f2)"
 		fail "$test_name" F "Failed vterm test $f"
 	fi
 }
 
-if test -z "$POWERLINE_TMUX_EXE" && test -d tests/bot-ci/deps/tmux ; then
-	for tmux in tests/bot-ci/deps/tmux/tmux-*/tmux ; do
-		export POWERLINE_TMUX_EXE="$PWD/$tmux"
+if test -z "$POWERLINE_TMUX_EXE" && test -d "$ROOT/tests/bot-ci/deps/tmux"
+then
+	for tmux in "$ROOT"/tests/bot-ci/deps/tmux/tmux-*/tmux ; do
+		export POWERLINE_TMUX_EXE="$tmux"
 		test_tmux || true
 	done
 else
@@ -43,10 +39,6 @@ else
 	test_tmux || true
 fi
 
-if test $FAILED -eq 0 ; then
-	rm -rf tests/vterm_tmux
-else
-	echo "$FAIL_SUMMARY"
-fi
+vterm_shutdown
 
 exit_suite

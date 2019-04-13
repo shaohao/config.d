@@ -1,12 +1,7 @@
 #!/bin/bash
-. tests/common.sh
+. tests/shlib/common.sh
 
 enter_suite root
-
-: ${USER:=`id -un`}
-: ${HOME:=`getent passwd $USER | cut -d: -f6`}
-
-export USER HOME
 
 if test "$TRAVIS" = true ; then
 	export PATH="$HOME/opt/fish/bin:${PATH}"
@@ -22,28 +17,26 @@ if test "$TRAVIS" = true ; then
 		. virtualenvwrapper.sh
 		workon cpython-ucs2-$UCS2_PYTHON_VARIANT
 		set -e
+	else
+		LIBRARY_PATH="$(ldd "$(which python)" | grep libpython | sed 's/^.* => //;s/ .*$//')"
+		LIBRARY_DIR="$(dirname "${LIBRARY_PATH}")"
+		export LD_LIBRARY_PATH="$LIBRARY_DIR${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH"
 	fi
-fi
-
-if ! which realpath ; then
-	realpath() {
-		$PYTHON -c 'import os, sys; print(os.path.realpath(sys.argv[1]))' "$1"
-	}
 fi
 
 export PYTHON="${PYTHON:=python}"
 export PYTHONPATH="${PYTHONPATH}${PYTHONPATH:+:}`realpath .`"
-for script in tests/run_*_tests.sh ; do
+for script in "$ROOT"/tests/test_*/test.sh ; do
 	test_name="${script##*/run_}"
 	if ! sh $script ; then
 		fail "${test_name%_tests.sh}" F "Failed $script"
 	fi
 done
 
-if test -e tests/failures ; then
-	echo "Some tests failed. Summary:"
-	cat tests/failures
-	rm tests/failures
+if test -e "$FAILURES_FILE" ; then
+	echo "Fails and skips summary:"
+	cat "$FAILURES_FILE"
+	rm "$FAILURES_FILE"
 fi
 
 exit_suite

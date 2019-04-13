@@ -99,7 +99,7 @@ class EmptyArgs(object):
 def init_tmux_environment(pl, args, set_tmux_environment=set_tmux_environment):
 	'''Initialize tmux environment from tmux configuration
 	'''
-	powerline = ShellPowerline(finish_args(os.environ, EmptyArgs('tmux', args.config_path)))
+	powerline = ShellPowerline(finish_args(None, os.environ, EmptyArgs('tmux', args.config_path)))
 	# TODO Move configuration files loading out of Powerline object and use it 
 	# directly
 	powerline.update_renderer()
@@ -164,7 +164,10 @@ def init_tmux_environment(pl, args, set_tmux_environment=set_tmux_environment):
 				# But it does not support empty attributes as well.
 				or 'none'))
 		else:
-			set_tmux_environment(varname, 'colour' + str(get_highlighting(group)[attr][0]))
+			if powerline.common_config['term_truecolor']:
+				set_tmux_environment(varname, '#{0:06x}'.format(get_highlighting(group)[attr][1]))
+			else:
+				set_tmux_environment(varname, 'colour' + str(get_highlighting(group)[attr][0]))
 
 	left_dividers = powerline.renderer.theme.dividers['left']
 	set_tmux_environment('_POWERLINE_LEFT_HARD_DIVIDER', left_dividers['hard'])

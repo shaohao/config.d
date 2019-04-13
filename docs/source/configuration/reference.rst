@@ -144,8 +144,8 @@ Common configuration is a subdictionary that is a value of ``common`` key in
 
 ``default_top_theme``
     String, determines which top-level theme will be used as the default. 
-    Defaults to ``powerline`` in unicode locales and ``ascii`` in non-unicode 
-    locales. See `Themes`_ section for more details.
+    Defaults to ``powerline_terminus`` in unicode locales and ``ascii`` in 
+    non-unicode locales. See `Themes`_ section for more details.
 
 Extension-specific configuration
 --------------------------------
@@ -191,6 +191,8 @@ Common configuration is a subdictionary that is a value of ``ext`` key in
     ``{output : theme_name}`` that maps the ``xrandr`` output names to the 
     local themes to use on that output.
 
+.. _config-ext-components:
+
 ``components``
     Determines which extension components should be enabled. This key is highly 
     extension-specific, here is the table of extensions and corresponding 
@@ -212,6 +214,13 @@ Common configuration is a subdictionary that is a value of ``ext`` key in
     +---------+----------+-----------------------------------------------------+
 
     All components are enabled by default.
+
+.. _config-ext-update_interval:
+
+``update_interval``
+    Determines how often WM status bars need to be updated, in seconds. Only 
+    valid for WM extensions which use ``powerline-daemon``. Defaults to 
+    2 seconds.
 
 .. _config-colors:
 
@@ -329,6 +338,7 @@ powerline_unicode7          Theme with powerline dividers and unicode-7 symbols
 unicode                     Theme without any symbols from private use area
 unicode_terminus            Theme containing only symbols from terminus PCF font
 unicode_terminus_condensed  Like above, but occupies as less space as possible
+powerline_terminus          Like unicode_terminus, but with powerline symbols
 ascii                       Theme without any unicode characters at all
 ==========================  ====================================================
 
@@ -357,6 +367,10 @@ ascii                       Theme without any unicode characters at all
        whatever theme is :ref:`the default <config-ext-theme>`. If this option 
        is set in the local themes it will be ignored. This option may also be 
        ignored in some bindings.
+
+``outer_padding``
+    Defines number of spaces at the end of output (on the right side) or at 
+    the start of output (on the left side). Defaults to ``1``.
 
 
 ``dividers``
@@ -388,7 +402,7 @@ ascii                       Theme without any unicode characters at all
     :ref:`display <config-themes-seg-display>`.
 
     Key :ref:`args <config-themes-seg-args>` (only for function and 
-    segments_list segments) is handled specially: unlike other values it is 
+    segment_list segments) is handled specially: unlike other values it is 
     merged with all other values, except that a single ``{module}.{function}`` 
     key if found prevents merging all ``{function}`` values.
 
@@ -425,7 +439,7 @@ ascii                       Theme without any unicode characters at all
 
     ``type``
         The segment type. Can be one of ``function`` (default), ``string`` or 
-        ``segments_list``:
+        ``segment_list``:
 
         ``function``
             The segment contents is the return value of the function defined in 
@@ -440,7 +454,7 @@ ascii                       Theme without any unicode characters at all
             highlighting group is defined in the :ref:`highlight_groups option 
             <config-themes-seg-highlight_groups>`.
 
-        ``segments_list``
+        ``segment_list``
             Sub-list of segments. This list only allows :ref:`function 
             <config-themes-seg-function>`, :ref:`segments 
             <config-themes-seg-segments>` and :ref:`args 
@@ -455,7 +469,7 @@ ascii                       Theme without any unicode characters at all
         Segment name. If present allows referring to this segment in 
         :ref:`segment_data <config-themes-segment_data>` dictionary by this 
         name. If not ``string`` segments may not be referred there at all and 
-        ``function`` and ``segments_list`` segments may be referred there using 
+        ``function`` and ``segment_list`` segments may be referred there using 
         either ``{module}.{function_name}`` or ``{function_name}``, whichever 
         will be found first. Function name is taken from :ref:`function key 
         <config-themes-seg-function>`.
