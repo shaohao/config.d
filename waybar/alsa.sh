@@ -6,7 +6,7 @@ MYCARDS=( $(aplay -l | grep 'card.*' | awk '{print $2$3}' | uniq | sort -r) )
 # get current working card
 cno=$(sed -n 's/.*card.*\([0-9]\+\)/\1/p' $HOME/.asoundrc | uniq | head -n 1)
 cname=''
-cidx=0
+cidx=1
 sid=Master
 for i in ${!MYCARDS[@]}; do
 	IFS=: read no name <<<"${MYCARDS[$i]}"

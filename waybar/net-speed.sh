@@ -9,7 +9,7 @@ net_status() {
 
 	cal_speed() {
 		echo $1 $2 | awk '{
-			v = (($1 - $2) * 1.0 / 5 / 1024);
+			v = (($1 - $2) * 1.0 / 1024);
 			if (v <= 1024) {
 				printf "%.1fk", v;
 			} else {
