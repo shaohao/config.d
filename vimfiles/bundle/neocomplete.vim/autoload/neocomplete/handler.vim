@@ -97,10 +97,6 @@ function! neocomplete#handler#_on_insert_char_pre() abort "{{{
     return
   endif
 
-  if neocomplete.old_char != ' ' && v:char == ' ' && v:count == 0
-    call s:make_cache_current_line()
-  endif
-
   let neocomplete.old_char = v:char
 endfunction"}}}
 function! neocomplete#handler#_on_text_changed() abort "{{{
@@ -120,7 +116,10 @@ endfunction"}}}
 function! s:complete_delay(timer) abort "{{{
   let event = s:timer.event
   unlet! s:timer
-  return s:do_auto_complete(event)
+
+  if mode() ==# 'i'
+    call s:do_auto_complete(event)
+  endif
 endfunction"}}}
 
 function! neocomplete#handler#_do_auto_complete(event) abort "{{{
@@ -129,6 +128,7 @@ function! neocomplete#handler#_do_auto_complete(event) abort "{{{
   endif
 
   if g:neocomplete#auto_complete_delay > 0 && has('timers')
+        \ && (!has('gui_macvim') || has('patch-8.0.95'))
     if exists('s:timer')
       call timer_stop(s:timer.id)
     endif
@@ -207,31 +207,14 @@ function! s:do_auto_complete(event) abort "{{{
 endfunction"}}}
 
 function! s:check_in_do_auto_complete(event) abort "{{{
-  if neocomplete#is_locked() || mode() !=# 'i'
+  if neocomplete#is_locked()
+        \ || (a:event !=# 'InsertEnter' && mode() !=# 'i')
     return 1
   endif
 
   " Detect completefunc.
   if &l:completefunc != '' && &l:buftype =~ 'nofile'
     return 1
-  endif
-
-  let neocomplete = neocomplete#get_current_neocomplete()
-  " Detect foldmethod.
-  if (&l:foldmethod ==# 'expr' || &l:foldmethod ==# 'syntax')
-        \ && !neocomplete.detected_foldmethod
-        \ && a:event !=# 'InsertEnter'
-    let neocomplete.detected_foldmethod = 1
-    call neocomplete#print_error(
-          \ printf('foldmethod = "%s" is detected.', &foldmethod))
-    redir => foldmethod
-      verbose setlocal foldmethod?
-    redir END
-    for msg in split(substitute(foldmethod, '\t', '', 'g'), "\n")
-      call neocomplete#print_error(msg)
-    endfor
-    call neocomplete#print_error(
-          \ 'You should disable it or install FastFold plugin.')
   endif
 endfunction"}}}
 function! s:is_skip_auto_complete(cur_text) abort "{{{
@@ -313,7 +296,11 @@ endfunction"}}}
 function! s:complete_key(key) abort "{{{
   call neocomplete#helper#complete_configure()
 
-  call feedkeys(a:key)
+  if has('patch-7.4.601')
+    call feedkeys(a:key, 'i')
+  else
+    call feedkeys(a:key)
+  endif
 endfunction"}}}
 
 function! s:indent_current_line() abort "{{{
@@ -345,11 +332,9 @@ endfunction"}}}
 function! s:is_delimiter() abort "{{{
   " Check delimiter pattern.
   let is_delimiter = 0
-  let filetype = neocomplete#get_context_filetype()
   let cur_text = neocomplete#get_cur_text(1)
 
-  for delimiter in ['/', '.'] +
-        \ get(g:neocomplete#delimiter_patterns, filetype, [])
+  for delimiter in ['/']
     if stridx(cur_text, delimiter,
           \ len(cur_text) - len(delimiter)) >= 0
       let is_delimiter = 1
