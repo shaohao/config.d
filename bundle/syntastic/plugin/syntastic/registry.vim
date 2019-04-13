@@ -19,6 +19,7 @@ let s:_DEFAULT_CHECKERS = {
         \ 'c':             ['gcc'],
         \ 'cabal':         ['cabal'],
         \ 'chef':          ['foodcritic'],
+        \ 'cmake':         ['cmakelint'],
         \ 'co':            ['coco'],
         \ 'cobol':         ['cobc'],
         \ 'coffee':        ['coffee', 'coffeelint'],
@@ -50,6 +51,7 @@ let s:_DEFAULT_CHECKERS = {
         \ 'java':          ['javac'],
         \ 'javascript':    ['jshint', 'jslint'],
         \ 'json':          ['jsonlint', 'jsonval'],
+        \ 'julia':         [],
         \ 'less':          ['lessc'],
         \ 'lex':           ['flex'],
         \ 'limbo':         ['limbo'],
@@ -66,6 +68,7 @@ let s:_DEFAULT_CHECKERS = {
         \ 'objcpp':        ['gcc'],
         \ 'ocaml':         ['camlp4o'],
         \ 'perl':          ['perlcritic'],
+        \ 'perl6':         [],
         \ 'php':           ['php', 'phpcs', 'phpmd'],
         \ 'po':            ['msgfmt'],
         \ 'pod':           ['podchecker'],
@@ -89,6 +92,7 @@ let s:_DEFAULT_CHECKERS = {
         \ 'solidity':      ['solc'],
         \ 'sql':           ['sqlint'],
         \ 'stylus':        ['stylint'],
+        \ 'svg':           [],
         \ 'tcl':           ['nagelfar'],
         \ 'tex':           ['lacheck', 'chktex'],
         \ 'texinfo':       ['makeinfo'],
@@ -101,6 +105,7 @@ let s:_DEFAULT_CHECKERS = {
         \ 'verilog':       ['verilator'],
         \ 'vhdl':          ['ghdl'],
         \ 'vim':           ['vimlint'],
+        \ 'vue':           ['pug_lint_vue', 'eslint'],
         \ 'xhtml':         ['tidy'],
         \ 'xml':           ['xmllint'],
         \ 'xslt':          ['xmllint'],
@@ -108,6 +113,7 @@ let s:_DEFAULT_CHECKERS = {
         \ 'yacc':          ['bison'],
         \ 'yaml':          ['jsyaml'],
         \ 'yang':          ['pyang'],
+        \ 'yara':          ['yarac'],
         \ 'z80':           ['z80syntaxchecker'],
         \ 'zpt':           ['zptlint'],
         \ 'zsh':           ['zsh'],
@@ -277,8 +283,8 @@ function! g:SyntasticRegistry.echoInfoFor(ftalias_list) abort " {{{2
     else
         let ft = ft_list[0]
         let available = self.getNamesOfAvailableCheckers(ft)
-        let active = map(self.getCheckersAvailable(ft, []), 'v:val.getName()')
-        let disabled = map(self.getCheckersDisabled(ft, []), 'v:val.getName()')
+        let active = map(self.getCheckersAvailable(ft, []), 'ft ==# v:val.getFiletype() ? v:val.getName() : v:val.getCName()')
+        let disabled = map(self.getCheckersDisabled(ft, []), 'ft ==# v:val.getFiletype() ? v:val.getName() : v:val.getCName()')
     endif
 
     let cnt = len(available)
@@ -294,7 +300,7 @@ function! g:SyntasticRegistry.echoInfoFor(ftalias_list) abort " {{{2
     let cnt = len(disabled)
     let plural = cnt != 1 ? 's' : ''
     if len(disabled)
-        let cklist = join(sort(disabled))
+        let cklist = join(sort(disabled, 's:_compare_checker_names'))
         echomsg 'Checker' . plural . ' disabled for security reasons: ' . cklist
     endif
 
@@ -412,6 +418,26 @@ endfunction " }}}2
 
 function! s:_disabled_by_ycm(filetype) abort " {{{2
     return index(s:_YCM_TYPES, a:filetype) >= 0
+endfunction " }}}2
+
+function! s:_compare_checker_names(a, b) abort " {{{2
+    if a:a ==# a:b
+        return 0
+    endif
+
+    if stridx(a:a, '/') < 0
+        if stridx(a:b, '/') < 0
+            return a:a < a:b ? -1 : 1
+        else
+            return -1
+        endif
+    else
+        if stridx(a:b, '/') < 0
+            return 1
+        else
+            return a:a < a:b ? -1 : 1
+        endif
+    endif
 endfunction " }}}2
 
 " }}}1
