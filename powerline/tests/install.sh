@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x
 
 remote_master_hex() {
 	local url="$1"
@@ -16,7 +17,7 @@ checkout_cached_dir() {
 	fi
 	if ! test -d "$target" ; then
 		git clone --depth=1 "$url" "$target"
-		mv "$target"/.git/refs/heads/master .version
+		git rev-parse HEAD > "$target/.version"
 		rm -rf "$target"/.git
 	fi
 }
@@ -45,13 +46,13 @@ if test -n "$USE_UCS2_PYTHON" ; then
 	mkvirtualenv -p "$PYTHON" cpython-ucs2-$UCS2_PYTHON_VARIANT
 	set -e
 	. tests/bot-ci/scripts/common/main.sh
-	pip install .
+	pip install --verbose --verbose --verbose .
 	if test "$UCS2_PYTHON_VARIANT" = "2.6" ; then
 		rm tests/bot-ci/deps/wheels/ucs2-CPython-${UCS2_PYTHON_VARIANT}*/pyuv*.whl
 	fi
 	pip install --no-deps tests/bot-ci/deps/wheels/ucs2-CPython-${UCS2_PYTHON_VARIANT}*/*.whl
 else
-	pip install .
+	pip install --verbose --verbose --verbose .
 	# FIXME Uv watcher sometimes misses events and INotify is not available in
 	#       Python-2.6, thus pyuv should be removed in order for VCS tests to 
 	#       pass.
