@@ -24,10 +24,9 @@ EOC
 	ln -sfvT $PWD/oh-my-zsh $HOME/.oh-my-zsh
 fi
 
-if _inst_cfg i3-wm; then
-	ln -sfvT $PWD/i3 $HOME/.i3
-	ln -sfv $PWD/i3/xprofile $HOME/.xprofile
-	ln -sfv $PWD/i3/i3status.conf $HOME/.i3status.conf
+if _inst_cfg 'sway+waybar'; then
+	ln -sfvT $PWD/sway $HOME/.config/sway
+	ln -sfvT $PWD/waybar $HOME/.config/waybar
 fi
 
 if _inst_cfg git; then
@@ -47,8 +46,8 @@ if _inst_cfg powerline-fonts; then
 	fc-cache -fv $HOME/.local/share/fonts
 fi
 
-if _inst_cfg rxvt-unicode ; then
-	ln -sfv $PWD/Xdefaults $HOME/.Xdefaults
+if _inst_cfg termite; then
+	ln -sfvT $PWD/termite $HOME/.config/termite
 fi
 
 if _inst_cfg tmux ; then
