@@ -8,7 +8,8 @@ set $up k
 set $right l
 
 set $term termite
-set $menu dmenu_path | dmenu | xargs swaymsg exec
+#set $menu dmenu_path | dmenu | xargs swaymsg exec
+set $menu termite --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --print-query | tail -n1 | xargs -r swaymsg -t command exec'"
 
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
@@ -154,6 +155,7 @@ gaps inner 2
 smart_gaps on
 
 # floating windows
+for_window [app_id="^launcher$"] floating enable, border none
 for_window [class="^feh$"] floating enable
 for_window [title="mpv"] floating enable
 
