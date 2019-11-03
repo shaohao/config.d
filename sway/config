@@ -7,9 +7,9 @@ set $down j
 set $up k
 set $right l
 
-set $term termite
+set $term kitty
 #set $menu dmenu_path | dmenu | xargs swaymsg exec
-set $menu termite --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --print-query | tail -n1 | xargs -r swaymsg -t command exec'"
+set $menu kitty --title=launcher -e bash -c 'compgen -c | sort -u | fzf --no-extended --print-query | tail -n1 | xargs -r swaymsg -t command exec'
 
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
@@ -22,7 +22,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 #{{{ Move your focus around
-bindsym $mod+$left focus left
+#bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
@@ -72,7 +72,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # You can "split" the current object of your focus with
 # $mod+b or $mod+v, for horizontal and vertical splits
 # respectively.
-bindsym $mod+b splith
+bindsym $mod+h splith
 bindsym $mod+v splitv
 
 # Switch the current container between different layout styles
@@ -155,7 +155,7 @@ gaps inner 2
 smart_gaps on
 
 # floating windows
-for_window [app_id="^launcher$"] floating enable, border none
+for_window [title="^launcher$"] floating enable, border none, move position center, opacity 0.5, resize set 600 80
 for_window [class="^feh$"] floating enable
 for_window [title="mpv"] floating enable
 
